@@ -8,6 +8,7 @@ import { EditEmployeeComponent } from './components/edit-employee/edit-employee.
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
 import { EmployeeService } from './services/employee.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { EmployeeService } from './services/employee.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [EmployeeService],
   bootstrap: [AppComponent]

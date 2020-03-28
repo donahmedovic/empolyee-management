@@ -9,12 +9,28 @@ import { Employee } from 'src/app/models/employee';
 })
 export class EmployeeListComponent implements OnInit {
   pageTitle = 'employee-List';
-  employeeList:Employee[];
+  employeeList:Employee[]=[];
+  FiltereEmployeeList:Employee[]=[];
+
+
+  _listFilter = '';
+  get listFilter(): string {
+    return this._listFilter;
+  }
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.FiltereEmployeeList = this.listFilter ? this.performFilter(this.listFilter) : this.employeeList;
+  }
 
   constructor(private employeeService:EmployeeService) { }
 
   ngOnInit(): void {
     this.employeeList=this.employeeService.getAllEmployee();
+    this.FiltereEmployeeList=this.employeeList;
   }
-
+  performFilter(filterBy: string): Employee[] {
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.employeeList.filter((employee: Employee) =>
+    employee.firstName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+  }
 }
