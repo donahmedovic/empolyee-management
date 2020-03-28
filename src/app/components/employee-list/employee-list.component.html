@@ -1,0 +1,41 @@
+<p>employee-list works!</p>
+<div class="card">
+    <div class="card-header">
+      {{pageTitle}}
+    </div>
+  
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table mb-0"
+                   *ngIf="employeeList && employeeList.length">
+              <thead>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Age</th>
+                  <th>Designation</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let employee of employeeList">
+                  <td>
+                    <a [routerLink]="['/employees', employee.id]">
+                      {{ employee.firstName }}
+                    </a>
+                  </td>
+                  <td>{{ employee.lastName }}</td>
+                  <td>{{ employee.age }}</td>
+                  <td>{{ employee.designation }}</td>
+                  <td>
+                    <button class="btn btn-outline-primary btn-sm"
+                            [routerLink]="['/employees', employee.id, 'edit']">
+                      Edit
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </div>
+</div>
