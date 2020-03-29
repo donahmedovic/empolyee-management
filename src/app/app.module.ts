@@ -1,6 +1,8 @@
 import {InMemoryWebApiModule} from 'angular-in-memory-web-api'
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from './shared/shared.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,7 +11,6 @@ import { EditEmployeeComponent } from './components/edit-employee/edit-employee.
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
 import { EmployeeService } from './services/employee.service';
-import { FormsModule } from '@angular/forms';
 import { EmpoloyeesData } from './services/Employees-data';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -22,9 +23,10 @@ import { HttpClientModule } from '@angular/common/http';
     EmployeeDetailsComponent
   ],
   imports: [
+    SharedModule,
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     InMemoryWebApiModule.forRoot(EmpoloyeesData)
   ],
