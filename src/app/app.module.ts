@@ -1,3 +1,4 @@
+import {InMemoryWebApiModule} from 'angular-in-memory-web-api'
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -9,6 +10,8 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
 import { EmployeeDetailsComponent } from './components/employee-details/employee-details.component';
 import { EmployeeService } from './services/employee.service';
 import { FormsModule } from '@angular/forms';
+import { EmpoloyeesData } from './services/Employees-data';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,9 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    InMemoryWebApiModule.forRoot(EmpoloyeesData)
   ],
   providers: [EmployeeService],
   bootstrap: [AppComponent]

@@ -25,8 +25,10 @@ export class EmployeeListComponent implements OnInit {
   constructor(private employeeService:EmployeeService) { }
 
   ngOnInit(): void {
-    this.employeeList=this.employeeService.getAllEmployee();
+    this.employeeService.getAllEmployee().subscribe({next:employees=>{
+    this.employeeList=employees;
     this.FiltereEmployeeList=this.employeeList;
+    }});
   }
   performFilter(filterBy: string): Employee[] {
     filterBy = filterBy.toLocaleLowerCase();
