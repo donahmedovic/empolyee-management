@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class EmployeeDetailsComponent implements OnInit {
   pageTitle = 'employee-details';
   employee:Employee|undefined;
+  errorMessage: string;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private employeeService:EmployeeService) { }
@@ -18,8 +19,11 @@ export class EmployeeDetailsComponent implements OnInit {
   ngOnInit(): void {
     const param = this.route.snapshot.paramMap.get('id');
     if (param) {
-      const id = +param;
-    this.employee= this.employeeService.getEmployee(id)
+      const id = +param; 
+    this.employeeService.getEmployee(id).subscribe({
+      next: (employee: Employee) =>this.employee= employee,
+      error: err => this.errorMessage = err
+    });
   }
 
   }
