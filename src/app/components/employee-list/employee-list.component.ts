@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Employee } from 'src/app/models/employee';
+import { observable } from 'rxjs';
 
 @Component({
   selector: 'app-employee-list',
@@ -25,14 +26,16 @@ export class EmployeeListComponent implements OnInit {
   constructor(private employeeService:EmployeeService) { }
 
   ngOnInit(): void {
+    // let obs=new observable.
     this.employeeService.getAllEmployee().subscribe({next:employees=>{
     this.employeeList=employees;
     this.FiltereEmployeeList=this.employeeList;
+    console.log('getting data')
     }});
   }
   performFilter(filterBy: string): Employee[] {
     filterBy = filterBy.toLocaleLowerCase();
     return this.employeeList.filter((employee: Employee) =>
-    employee.firstName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+    employee.name.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 }

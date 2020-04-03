@@ -19,7 +19,7 @@ export class EmployeeDetailsComponent implements OnInit {
   ngOnInit(): void {
     const param = this.route.snapshot.paramMap.get('id');
     if (param) {
-      const id = +param; 
+      const id = param; 
     this.employeeService.getEmployee(id).subscribe({
       next: (employee: Employee) =>this.employee= employee,
       error: err => this.errorMessage = err

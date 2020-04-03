@@ -27,8 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    InMemoryWebApiModule.forRoot(EmpoloyeesData)
+    HttpClientModule
+    // ,InMemoryWebApiModule.forRoot(EmpoloyeesData)
   ],
   providers: [EmployeeService],
   bootstrap: [AppComponent]

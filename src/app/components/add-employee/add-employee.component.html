@@ -11,36 +11,51 @@
   
         <div class="form-group row mb-2">
           <label class="col-md-2 col-form-label"
-                 for="firstNameId">First Name</label>
+                 for="fullnameId">Full Name</label>
           <div class="col-md-8">
             <input class="form-control"
-                   id="firstNameId"
+                   id="fullnameId"
                    type="text"
-                   placeholder="First Name (required)"
-                   formControlName="firstName"
-                   [ngClass]="{'is-invalid': displayMessage.firstName }" />
+                   placeholder="Full Name (required)"
+                   formControlName="name"
+                   [ngClass]="{'is-invalid': displayMessage.name }" />
             <span class="invalid-feedback">
-                {{displayMessage.firstName}}
+                {{displayMessage.name}}
             </span>
           </div>
         </div>
   
         <div class="form-group row mb-2">
           <label class="col-md-2 col-form-label"
-                 for="lastNameId">Last Name</label>
+                 for="emailId">Email</label>
           <div class="col-md-8">
             <input class="form-control"
-                   id="lastNameId"
+                   id="emailId"
                    type="text"
-                   placeholder="Last Name (required)"
-                   formControlName="lastName"
-                   [ngClass]="{'is-invalid': displayMessage.lastName}" />
+                   placeholder="Email (required)"
+                   formControlName="email"
+                   [ngClass]="{'is-invalid': displayMessage.email}" />
             <span class="invalid-feedback">
-                {{displayMessage.lastName}}
+                {{displayMessage.email}}
             </span>
           </div>
         </div>
-  
+        
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="mobilId">Mobile </label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="mobilId"
+                   type="text"
+                   placeholder="Mobile (required)"
+                   formControlName="mobile"
+                   [ngClass]="{'is-invalid': displayMessage.mobile}" />
+            <span class="invalid-feedback">
+                {{displayMessage.mobile}}
+            </span>
+          </div>
+        </div>
         <div class="form-group row mb-2">
           <label class="col-md-2 col-form-label"
                  for="ageId">age min 20 max 65</label>

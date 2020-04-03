@@ -12,8 +12,9 @@ Search: <input id="input" type="text" size="30" pInputText [(ngModel)]="listFilt
                    *ngIf="employeeList && employeeList.length">
               <thead>
                 <tr>
-                  <th>First Name</th>
-                  <th>Last Name</th>
+                  <th>Full Name</th>
+                  <th> Email  </th>
+                  <th> Mobile  </th>
                   <th>Age</th>
                   <th>Designation</th>
                   <th></th>
@@ -22,16 +23,17 @@ Search: <input id="input" type="text" size="30" pInputText [(ngModel)]="listFilt
               <tbody>
                 <tr *ngFor="let employee of FiltereEmployeeList">
                   <td>
-                    <a [routerLink]="['/employees', employee.id]">
-                      {{ employee.firstName }}
+                    <a [routerLink]="['/employees', employee._id]">
+                      {{ employee.name }}
                     </a>
                   </td>
-                  <td>{{ employee.lastName }}</td>
+                  <td>{{ employee.email }}</td>
+                  <td>{{ employee.mobile }}</td>
                   <td>{{ employee.age }}</td>
                   <td>{{ employee.designation }}</td>
                   <td>
                     <button class="btn btn-outline-primary btn-sm"
-                            [routerLink]="['/employees', employee.id, 'edit']">
+                            [routerLink]="['/employees',  employee._id, 'edit']">
                       Edit
                     </button>
                   </td>

@@ -9,7 +9,8 @@ import { catchError, tap, map } from 'rxjs/operators';
 })
 export class EmployeeService {
 
-  private employeesUrl = 'api/employees';
+  private employeesUrl = 'http://localhost:4000/api';
+  private headers = new HttpHeaders({'Content-Type':'application/json'});
 
   constructor(private http: HttpClient) { }
 
@@ -23,20 +24,27 @@ export class EmployeeService {
     // return this.allEmployee;
   }
   addEmpoyee(employee: Employee): Observable<Employee> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    employee.id=null;
-    return this.http.post<Employee>(this.employeesUrl,employee).pipe(
-      tap(data => console.log('createProduct: ' + JSON.stringify(data))),
+    employee._id=null;
+    let url = `${this.employeesUrl}/create`;
+    return this.http.post<Employee>(url ,employee).pipe(
+      tap(data => console.log('createEmployee: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );
     //this.allEmployee.push(employee);
   }
-  updateEmployee(employee: Employee) {
-    let updatedEmp = this.allEmployee.find(emp => emp.id == employee.id);
-    updatedEmp = { ...employee };
+  // updateEmployee(employee: Employee) {
+  //   let updatedEmp = this.allEmployees.find(emp => emp._id == employee._id);
+  //   updatedEmp = { ...employee };
+  // }
+  updateEmployee(employee: Employee): Observable<any> {
+    let url = `${this.employeesUrl}/update/${employee._id}`;
+    return this.http.put(url, employee, { headers: this.headers }).pipe(
+      catchError(this.handleError)
+    )
   }
+
   
-  deleteEmployee(id: number): Observable<{}> {
+  deleteEmployee(id: string): Observable<{}> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const url = `${this.employeesUrl}/${id}`;
     return this.http.delete<Employee>(url, { headers })
@@ -45,16 +53,22 @@ export class EmployeeService {
         catchError(this.handleError)
       );
   }
-  getEmployee(id:number): Observable<Employee> {
-    if (id === 0) {
+  getEmployee(id:string): Observable<Employee> {
+    if (id ==="null") {
       return of(this.initializeEmployee());
     }
-    const url = `${this.employeesUrl}/${id}`;
+    const url = `${this.employeesUrl}/read/${id}`;
     return this.http.get<Employee>( url ).pipe(
       tap(data=>console.log(JSON.stringify(data))),catchError(this.handleError));
   }
+  // verifyEmployeeEmail(email:string): Observable<Boolean> {
+  //   const url = `${this.employeesUrl}/${email}`;
+  //   return this.http.get<Employee>( url ).pipe(
+  //     tap(data=>return data.email==email),catchError(this.handleError));
+  // }
+
   initializeEmployee(): Employee {
-    return {id:0,age:null,designation:null,firstName:null,lastName:null};
+    return {_id:null,age:null,email:null,designation:null,name:null,mobile:null};
   }
   private handleError(err) {
     // in a real world app, we may send the server to some remote logging infrastructure
@@ -71,23 +85,48 @@ export class EmployeeService {
     console.error(err);
     return throwError(errorMessage);
   }
-  allEmployee = [{
+   allEmployees = [{
     id: 1,
     age: 55,
+    email:'a.sharkawy@aot.com',
     firstName: "ahmed",
     lastName: "sharkawy",
     designation: "Associate Lead, Technology"
   }, {
     id: 2,
     age: 35,
+    email:'f.lotfy@aot.com',
     firstName: "fady",
     lastName: "lotfy",
     designation: "Associate Senior, Technology"
   }, {
     id: 3,
     age: 25,
+    email:'s.soliman@aot.com',
     firstName: "sara",
     lastName: "soliman",
     designation: "Recruitment specialist, HR"
-  },];
+  },
+  {
+    id: 4,
+    age: 29,
+    email:'a.Gamal@aot.com',
+    firstName: "Ali",
+    lastName: "Gamal",
+    designation: "Team Lead, UI"
+  }, {
+    id: 5,
+    age: 31,
+    email:'s.Saad@aot.com',
+    firstName: "Sohaib",
+    lastName: "Saad",
+    designation: "Senior IOS, Mobile"
+  },{
+    id: 6,
+    age: 34,
+    email:'m.monir@aot.com',
+    firstName: "Mahmoud",
+    lastName: "monir",
+    designation: "Senior Android, Mobile"
+  }];
 }
