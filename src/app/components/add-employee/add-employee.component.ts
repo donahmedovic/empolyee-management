@@ -78,7 +78,7 @@ export class AddEmployeeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.pageTitle = 'Add Employee';
     } else {
       this.pageTitle = `Edit Employee : ${this.employee.name}`;
-      this.employeeForm.valid;
+      this.employeeForm.updateValueAndValidity();
     }
     console.log(this.pageTitle)
     this.employeeForm.patchValue({
